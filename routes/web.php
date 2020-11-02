@@ -23,6 +23,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/', 'App\Http\Controllers\PostsController@index')->name('top');
 
-Route::resource('posts', 'App\Http\Controllers\PostsController', ['only' => ['create', 'store']]);
 
 Route::resource('posts', 'App\Http\Controllers\PostsController', ['only' => ['create', 'store', 'show']]);

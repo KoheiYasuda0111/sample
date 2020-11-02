@@ -1,8 +1,9 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Post;
-use App\Comment;
+use App\Models\Post;
+use App\Models\Comment;
 
 class PostsTableSeeder extends Seeder
 {
@@ -13,11 +14,17 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Post::class, 50)
+        Post::truncate();
+        Comment::truncate();
+        Post::factory()
+            ->times(50)
             ->create()
             ->each(function ($post) {
-                $comments = factory(App\Comment::class, 2)->make();
-                $post->comments()->saveMany($comments);
+                Comment::factory()
+                    ->times(2)
+                    ->create([
+                        'post_id' => $post->id
+                    ]);
             });
     }
 }

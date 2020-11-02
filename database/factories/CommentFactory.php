@@ -1,9 +1,32 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Comment::class, function (Faker $faker) {
-    return [
-        'body' => "コメント。テキスト。",
-    ];
-});
+use App\Models\Comment;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class CommentFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Comment::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'body' => $this->faker->sentence
+        ];
+    }
+}
+
+
+
